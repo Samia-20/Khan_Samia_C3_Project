@@ -51,7 +51,17 @@ public class Restaurant {
     }
     // Method to calculate order value for items list argument from the Restaurant.
     public int showOrderValue(List<Item> listofItems) throws itemValueIsNegativeException,itemNotFoundException {
-        return 0;
+        int orderValue = 0;
+        int i = 0;
+        while (i < listofItems.size()) {
+            orderValue = orderValue + listofItems.get(i).getPrice();
+
+            if (listofItems.get(i).getPrice() < 0) {
+                throw new itemValueIsNegativeException(listofItems.get(i).getName());
+            }
+            i++;
+        }
+        return orderValue;
     }
     
     public void removeFromMenu(String itemName) throws itemNotFoundException {
