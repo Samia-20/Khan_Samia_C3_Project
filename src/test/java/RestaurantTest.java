@@ -20,7 +20,27 @@ class RestaurantTest {
         restaurant.addToMenu("Sweet corn soup", 119);
         restaurant.addToMenu("Vegetable lasagne", 269);
 
+        Item item1 = new Item("Sweet corn soup",119);
+        Item item2 = new Item("Vegetable lasagne",269);
+        testItemList.add(item1);
+        testItemList.add(item2);
 
+    }
+    //Test cases for showOrder Value method in Restaurant
+    @Test
+    public void showordervalue_should_return_correct_order_value() throws itemNotFoundException,itemValueIsNegativeException {
+        assertEquals(388,restaurant.showOrderValue(testItemList));
+    }
+    @Test
+   public void showordervalue_should_return_incorrect_order_value_when_price_is_wrong () throws itemNotFoundException,itemValueIsNegativeException {
+
+        assertNotEquals(300,restaurant.showOrderValue(testItemList));
+    }
+    @Test
+    public void showordervalue_should_throw_an_exception_when_item_value_is_negative () throws itemValueIsNegativeException,itemNotFoundException {
+        Item item3 = new Item("Vegetable Cutlet",-2);
+        testItemList.add(item3);
+        assertThrows(itemValueIsNegativeException.class,()->restaurant.showOrderValue(testItemList));
     }
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>OPEN/CLOSED<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
